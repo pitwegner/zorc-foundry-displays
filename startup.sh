@@ -37,6 +37,7 @@ function usage () {
 echo 'Logging in to Hengli Foundry Cloud.'
 
 echo "curl"
+sleep 15
 CREDENTIALS=$(curl -s -d "{\"username\": \"$FC_USERNAME\",\"password\": \"$FC_PASSWORD\"}" \
      -H "Content-Type: application/json" -H "Accept: application/json" \
      $FC_REQUEST_HEADERS $FC_REQUEST_HTTP_METHOD $FC_LOGIN_URL)
@@ -48,8 +49,8 @@ echo $ACCESS_TOKEN
 echo $REFRESH_TOKEN
 
 FC_MONITORING_HOST="foundry.zorc:800"
-FC_MONITORING_URL_PARAMETERS="fullScreen=true&accessToken=$ACCESS_TOKEN&refreshToken=$REFRESH_TOKEN"
-FC_MONITORING_PATH="/monitoring/moulding?$FC_MONITORING_URL_PARAMETERS"
+FC_MONITORING_URL_PARAMETERS="accessToken=$ACCESS_TOKEN&refreshToken=$REFRESH_TOKEN&fullScreen=true&furnaces=ca67b610-24ad-4de1-9cbd-d3f632c5c284,75757f6a-4a5e-424b-a11f-6573e1e11a16,9a3c5ead-e457-4cfe-8923-425a17510355"
+FC_MONITORING_PATH="/monitoring/moulding/displays?$FC_MONITORING_URL_PARAMETERS"
 FC_MONITORING_URL=$FC_PROTOCOL$FC_MONITORING_HOST$FC_MONITORING_PATH
 
 echo $FC_MONITORING_URL
@@ -58,5 +59,6 @@ xset s noblank
 xset s off
 xset -dpms
 
+export DISPLAY=:0
 unclutter -idle 0.5 -root &
 /usr/bin/chromium-browser --noerrdialogs --disable-infobars --kiosk $FC_MONITORING_URL &
