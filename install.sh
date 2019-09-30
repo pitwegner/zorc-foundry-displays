@@ -1,8 +1,12 @@
 #!/bin/bash
 
+FC_USERNAME=$1
+FC_PASSWORD=$2
+FC_FURNACES=$3
+
 wget -O /home/pi/kiosk.sh https://github.com/marcfreiheit/zorc-foundry-displays/edit/master/startup.sh
 
-cat > /lib/systemd/system/kiosk.service <<EOF
+sudo tee /lib/systemd/system/kiosk.service > /dev/null <<EOF
 [Unit]
 Description=Chromium Kiosk
 Wants=graphical.target
@@ -12,7 +16,7 @@ After=graphical.target
 Environment=DISPLAY=:0.0
 Environment=XAUTHORITY=/home/pi/.Xauthority
 Type=simple
-ExecStart=/bin/bash /home/pi/kiosk.sh
+ExecStart=/bin/bash /home/pi/kiosk.sh $FC_USERNAME $FC_PASSWORD $FC_FURNACES
 Restart=on-abort
 User=pi
 Group=pi

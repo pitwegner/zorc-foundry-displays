@@ -30,7 +30,7 @@ function usage () {
     echo "Furnaces missing"
   fi
 
-  echo "\nusage: $0 <foundry_cloud-username> <foundry_cloud-password>"
+  echo "\nusage: $0 <foundry_cloud-username> <foundry_cloud-password> <foundry_cloud-furnaces>"
   exit 2
 }
 
