@@ -59,7 +59,7 @@ echo "raspberrypi-p19-f56" > /etc/hostname
 ### Download and Install the Setup script from that repo here
 
 ```bash
-wget -O - https://github.com/marcfreiheit/zorc-foundry-displays/blob/master/install.sh | bash
+wget -O - https://raw.githubusercontent.com/marcfreiheit/zorc-foundry-displays/master/install.sh | bash
 ```
 
 ### Misc
