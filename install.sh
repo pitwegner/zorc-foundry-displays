@@ -4,7 +4,7 @@ FC_USERNAME=$1
 FC_PASSWORD=$2
 FC_FURNACES=$3
 
-wget -O /home/pi/kiosk.sh https://github.com/marcfreiheit/zorc-foundry-displays/edit/master/startup.sh
+wget -O /home/pi/kiosk.sh https://raw.githubusercontent.com/marcfreiheit/zorc-foundry-displays/master/startup.sh
 
 exit 0
 
