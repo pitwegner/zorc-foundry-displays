@@ -6,8 +6,6 @@ FC_FURNACES=$3
 
 wget -O /home/pi/kiosk.sh https://raw.githubusercontent.com/marcfreiheit/zorc-foundry-displays/master/startup.sh
 
-exit 0
-
 sudo tee /lib/systemd/system/kiosk.service > /dev/null <<EOF
 [Unit]
 Description=Chromium Kiosk
