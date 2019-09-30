@@ -41,6 +41,7 @@ prompt_for "Furnaces to be displayed" "" FC_FURNACES
 [[ -z "$FC_FURNACES" ]] && usage 'furnaces'
 
 wget -O /home/$CURRENT_USER/kiosk.sh https://raw.githubusercontent.com/marcfreiheit/zorc-foundry-displays/master/startup.sh
+chmod u+x /home/$CURRENT_USER/kiosk.sh
 
 sudo tee /lib/systemd/system/kiosk.service > /dev/null <<EOF
 [Unit]
