@@ -3,6 +3,7 @@
 # Foundry Cloud Credentials
 FC_USERNAME=$1
 FC_PASSWORD=$2
+FC_FURNACES=$3
 
 #
 FC_PROTOCOL="http://"
@@ -25,6 +26,9 @@ function usage () {
   if [ "$1" = "password" ]; then
     echo "Password missing."
   fi
+  if [ "$1" = "furnaces"]; then
+    echo "Furnaces missing"
+  fi
 
   echo "\nusage: $0 <foundry_cloud-username> <foundry_cloud-password>"
   exit 2
@@ -33,6 +37,7 @@ function usage () {
 # Validating Data
 [[ -z "$FC_USERNAME" ]] && usage 'username'
 [[ -z "$FC_PASSWORD" ]] && usage 'password'
+[[ -z "$FC_FURNACES" ]] && usage 'furnaces'
 
 echo 'Logging in to Hengli Foundry Cloud.'
 
@@ -49,7 +54,7 @@ echo $ACCESS_TOKEN
 echo $REFRESH_TOKEN
 
 FC_MONITORING_HOST="foundry.zorc:800"
-FC_MONITORING_URL_PARAMETERS="accessToken=$ACCESS_TOKEN&refreshToken=$REFRESH_TOKEN&fullScreen=true&furnaces=ca67b610-24ad-4de1-9cbd-d3f632c5c284,75757f6a-4a5e-424b-a11f-6573e1e11a16,9a3c5ead-e457-4cfe-8923-425a17510355"
+FC_MONITORING_URL_PARAMETERS="accessToken=$ACCESS_TOKEN&refreshToken=$REFRESH_TOKEN&fullScreen=true&furnaces=$FURNACES"
 FC_MONITORING_PATH="/monitoring/melt-shop/detailed-displays?$FC_MONITORING_URL_PARAMETERS"
 FC_MONITORING_URL=$FC_PROTOCOL$FC_MONITORING_HOST$FC_MONITORING_PATH
 
