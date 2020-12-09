@@ -1,13 +1,13 @@
 #!/bin/bash
 
 # Foundry Cloud Credentials
-FC_USERNAME=$1
-FC_PASSWORD=$2
-FC_FURNACES=$3
+FC_USERNAME="MAN-Display"
+FC_PASSWORD="123456"
+
 
 #
 FC_PROTOCOL="http://"
-FC_HOST="api.foundry.zorc:800"
+FC_HOST="192.168.100.12:8000"
 FC_LOGIN_PATH="/login"
 FC_LOGIN_URL="$FC_PROTOCOL$FC_HOST$FC_LOGIN_PATH"
 
@@ -26,20 +26,18 @@ function usage () {
   if [ "$1" = "password" ]; then
     echo "Password missing."
   fi
-  if [ "$1" = "furnaces"]; then
-    echo "Furnaces missing"
-  fi
 
-  echo "\nusage: $0 <foundry_cloud-username> <foundry_cloud-password> <foundry_cloud-furnaces>"
+
+  echo "\nusage: $0 <foundry_cloud-username> <foundry_cloud-password>"
   exit 2
 }
 
 # Validating Data
 [[ -z "$FC_USERNAME" ]] && usage 'username'
 [[ -z "$FC_PASSWORD" ]] && usage 'password'
-[[ -z "$FC_FURNACES" ]] && usage 'furnaces'
 
-echo 'Logging in to Hengli Foundry Cloud.'
+
+echo 'Logging in to MAN Foundry Cloud.'
 
 echo "curl"
 sleep 15
@@ -53,9 +51,9 @@ REFRESH_TOKEN=$(echo $CREDENTIALS | python3 -c "import sys, json; print(json.loa
 echo $ACCESS_TOKEN
 echo $REFRESH_TOKEN
 
-FC_MONITORING_HOST="foundry.zorc:800"
-FC_MONITORING_URL_PARAMETERS="accessToken=$ACCESS_TOKEN&refreshToken=$REFRESH_TOKEN&fullScreen=true&furnaces=$FURNACES"
-FC_MONITORING_PATH="/monitoring/melt-shop/detailed-displays?$FC_MONITORING_URL_PARAMETERS"
+FC_MONITORING_HOST="192.168.100.12:800"
+FC_MONITORING_URL_PARAMETERS="fullscreen=true&location=2&user=$FC_USERNAME&pass=$FC_PASSWORD&accessToken=$ACCESS_TOKEN&refreshToken=$REFRESH_TOKEN"
+FC_MONITORING_PATH="/dashboard?$FC_MONITORING_URL_PARAMETERS"
 FC_MONITORING_URL=$FC_PROTOCOL$FC_MONITORING_HOST$FC_MONITORING_PATH
 
 echo $FC_MONITORING_URL
